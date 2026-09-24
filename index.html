@@ -1,194 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Blood Sugar Battle</title>
-  <link rel="stylesheet" href="styles.css" />
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Blood Sugar Battle</title>
+<style>
+:root{--ink:#14213d;--muted:#65738f;--line:#dbe4f2;--pink:#ef476f;--blue:#246bce;--green:#2b9b66;--gold:#f2aa26;--panel:#fff;--bg:#f4f8ff;}
+*{box-sizing:border-box} body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--ink);background:linear-gradient(135deg,#edf5ff,#fff8ee)}
+button,a{font:inherit} button{cursor:pointer} .hidden{display:none!important} .app{padding:18px;min-height:100vh} .top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px} .brand{display:flex;gap:12px;align-items:center} .badge{width:62px;height:62px;border-radius:20px;background:#fff;display:grid;place-items:center;box-shadow:0 10px 28px #14213d1a} .badge svg{width:46px} h1,h2,h3{margin:0} h1{font-size:1.8rem} .eyebrow{font-size:.75rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:800} .layout{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(300px,.7fr);gap:18px} .panel{background:#ffffffed;border:1px solid #ffffff;border-radius:26px;box-shadow:0 12px 34px #14213d18} .game{padding:26px;min-height:calc(100vh - 130px)} .side{padding:20px} .hero{display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:20px;min-height:65vh} .hero h2{font-size:2.35rem;margin:8px 0 12px} .hero p{font-size:1.1rem;line-height:1.55;color:var(--muted)} .tag{display:inline-block;background:#ffe5ec;color:#b3224a;padding:8px 12px;border-radius:999px;font-weight:800;font-size:.86rem} .heroArt svg{width:100%;height:auto} .actions,.controls{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px} .primary,.secondary,.ghost,.mini{border-radius:14px;border:1px solid var(--line);padding:12px 16px;font-weight:800} .primary{background:linear-gradient(135deg,var(--pink),#ff7a59);color:white;border:0} .secondary,.ghost,.mini{background:#fff;color:var(--ink)} .ghost{padding:9px 12px} .qtop{display:flex;justify-content:space-between;align-items:flex-start;gap:14px} .qtop h2{font-size:2rem;margin-top:4px} .metrics{display:flex;gap:10px;align-items:flex-start;flex-wrap:wrap;justify-content:flex-end} .points{background:#e8f7ef;color:#18744a;padding:10px 13px;border-radius:999px;font-weight:800} .timer{background:white;border:1px solid var(--line);border-radius:18px;padding:10px;min-width:200px;text-align:center} .time{font-size:1.5rem;font-weight:900;display:block;margin-bottom:6px} .timerRow{display:flex;justify-content:center;gap:5px;margin-top:5px} .timerSet{border:1px solid var(--line);background:#f4f7ff;border-radius:999px;padding:6px 10px;font-weight:800} .timerSet.active{background:var(--blue);color:#fff} .scenario{display:grid;grid-template-columns:210px 1fr;margin-top:18px;background:white;border:1px solid var(--line);border-radius:24px;overflow:hidden;box-shadow:0 8px 24px #14213d12} .graphic{background:linear-gradient(180deg,#101b38,#263c72);display:grid;place-items:center;padding:18px;min-height:300px} .graphic svg{width:155px;height:155px} .qcopy{padding:28px;display:flex;flex-direction:column;justify-content:center} .qcopy p{font-size:1.52rem;line-height:1.45;margin:8px 0 0} .label{text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-size:.78rem;font-weight:900} .answer{margin-top:16px;background:white;border:1px solid var(--line);border-radius:22px;padding:22px} .answer p{font-size:1.12rem;line-height:1.55} .score{background:#f3f7ff;border:1px dashed #b9cbef;border-radius:15px;padding:13px;font-weight:800} .controls{justify-content:center} .side h3{font-size:1.12rem;margin-bottom:10px} .rounds{display:grid;gap:8px} .round{border:1px solid var(--line);background:#fff;border-radius:16px;padding:11px} .round.active{border-color:#ef476f88;box-shadow:0 6px 14px #ef476f18} .round strong{display:block} .round small{color:var(--muted);line-height:1.35} .block{margin-top:18px} .tips{margin:0;padding-left:18px;color:var(--muted);line-height:1.5} .scoreboard{display:grid;gap:8px} .team{display:grid;grid-template-columns:1fr auto;gap:8px;border:1px solid var(--line);background:#fff;border-radius:14px;padding:9px} .team input{width:100%;border:1px solid var(--line);border-radius:10px;padding:8px;font-weight:700} .scoreCtrls{display:flex;align-items:center;gap:5px} .scoreBtn{width:32px;height:32px;border:1px solid var(--line);border-radius:9px;background:#f8fbff;font-weight:900} .scoreVal{min-width:34px;text-align:center;font-weight:900;font-size:1.15rem} .end{min-height:65vh;display:flex;flex-direction:column;justify-content:center} .warn{color:#d7263d} @media(max-width:1100px){.layout{grid-template-columns:1fr}} @media(max-width:760px){.hero,.scenario{grid-template-columns:1fr} .qtop{flex-direction:column} .qcopy p{font-size:1.18rem} .hero h2,.qtop h2{font-size:1.6rem}}
+</style>
 </head>
-<body>
-  <div class="app-shell">
-    <header class="topbar">
-      <div class="brand-wrap">
-        <div class="logo-badge" aria-hidden="true">
-          <svg viewBox="0 0 120 120" role="img">
-            <defs>
-              <linearGradient id="g1" x1="0" x2="1">
-                <stop offset="0%" stop-color="#ff6b6b"></stop>
-                <stop offset="100%" stop-color="#f9a826"></stop>
-              </linearGradient>
-            </defs>
-            <circle cx="60" cy="60" r="56" fill="url(#g1)" opacity=".18"></circle>
-            <path d="M45 22c-9 7-14 18-14 31 0 7 1 13 4 19-4 4-7 10-7 17 0 18 15 33 33 33s33-15 33-33c0-7-3-13-7-17 3-6 4-12 4-19 0-13-5-24-14-31-8 5-11 12-12 17h-10c-1-5-4-12-10-17Z" fill="#fff"></path>
-            <path d="M53 46h14c7 0 13 6 13 13v9c0 11-9 20-20 20s-20-9-20-20v-9c0-7 6-13 13-13Z" fill="#ffd8d8"></path>
-            <path d="M60 46V31" stroke="#fff" stroke-width="5" stroke-linecap="round"></path>
-            <circle cx="60" cy="65" r="10" fill="#ffffff"></circle>
-            <path d="M60 65l8-6" stroke="#f9a826" stroke-width="4" stroke-linecap="round"></path>
-          </svg>
-        </div>
-        <div>
-          <div class="eyebrow">Projected Team Game • HUN1201 Module 3</div>
-          <h1>Blood Sugar Battle</h1>
-        </div>
-      </div>
-      <div class="top-actions">
-        <button id="fullscreenBtn" class="ghost-btn">Fullscreen</button>
-        <button id="resetGameBtn" class="ghost-btn">Restart Game</button>
-      </div>
-    </header>
-
-    <main class="layout">
-      <section class="game-panel panel">
-        <div class="hero" id="heroCard">
-          <div class="hero-copy">
-            <div class="hero-tag">Keep blood glucose in the zone</div>
-            <h2>Use physiology, not guesswork.</h2>
-            <p>
-              Students work in teams, write answers on paper, and you reveal the explanation.
-              Manual scoring is built in.
-            </p>
-            <div class="hero-buttons">
-              <button id="startBtn" class="primary-btn">Start Game</button>
-              <a class="secondary-btn" href="docs/Blood_Sugar_Battle_Group_Answer_Sheet.pdf" target="_blank" rel="noopener">Open Group Sheet</a>
-              <a class="secondary-btn" href="docs/Blood_Sugar_Battle_Teacher_Key.pdf" target="_blank" rel="noopener">Open Teacher Key</a>
-            </div>
-          </div>
-          <div class="hero-graphic" aria-hidden="true">
-            <svg viewBox="0 0 520 340">
-              <defs>
-                <linearGradient id="cardGrad" x1="0" x2="1">
-                  <stop offset="0%" stop-color="#f5426c"></stop>
-                  <stop offset="100%" stop-color="#ffb347"></stop>
-                </linearGradient>
-                <linearGradient id="blueGrad" x1="0" x2="1">
-                  <stop offset="0%" stop-color="#39b4ff"></stop>
-                  <stop offset="100%" stop-color="#6a5cff"></stop>
-                </linearGradient>
-              </defs>
-              <rect x="24" y="28" width="206" height="160" rx="22" fill="#fff"></rect>
-              <rect x="34" y="38" width="186" height="24" rx="12" fill="url(#cardGrad)" opacity=".2"></rect>
-              <rect x="48" y="90" width="88" height="72" rx="20" fill="#f1f5ff"></rect>
-              <path d="M73 140c-10-20 2-46 24-52" fill="none" stroke="#ff7e67" stroke-width="9" stroke-linecap="round"></path>
-              <path d="M97 88c10 18 6 43-10 58" fill="none" stroke="#39b4ff" stroke-width="9" stroke-linecap="round"></path>
-              <rect x="146" y="90" width="56" height="12" rx="6" fill="#d8dff3"></rect>
-              <rect x="146" y="114" width="48" height="12" rx="6" fill="#d8dff3"></rect>
-              <rect x="146" y="138" width="36" height="12" rx="6" fill="#d8dff3"></rect>
-
-              <rect x="250" y="76" width="246" height="190" rx="28" fill="#0e1730"></rect>
-              <circle cx="372" cy="171" r="74" fill="#1f2b56"></circle>
-              <circle cx="372" cy="171" r="56" fill="#f5f8ff"></circle>
-              <path d="M372 171l32-19" stroke="#ff9f43" stroke-width="8" stroke-linecap="round"></path>
-              <circle cx="372" cy="171" r="7" fill="#ff9f43"></circle>
-              <path d="M322 227c15 13 31 18 50 18 19 0 38-6 54-18" fill="none" stroke="#5ed3ff" stroke-width="8" stroke-linecap="round"></path>
-              <rect x="279" y="106" width="61" height="26" rx="13" fill="url(#cardGrad)"></rect>
-              <text x="309.5" y="124" text-anchor="middle" font-size="12" fill="#fff" font-family="Arial, sans-serif">INSULIN</text>
-              <rect x="406" y="106" width="73" height="26" rx="13" fill="url(#blueGrad)"></rect>
-              <text x="442.5" y="124" text-anchor="middle" font-size="12" fill="#fff" font-family="Arial, sans-serif">GLUCAGON</text>
-              <rect x="279" y="208" width="200" height="34" rx="17" fill="#18254a"></rect>
-              <text x="379" y="230" text-anchor="middle" font-size="14" fill="#dce7ff" font-family="Arial, sans-serif">Blood Glucose Meter</text>
-            </svg>
-          </div>
-        </div>
-
-        <div class="question-wrap hidden" id="questionWrap">
-          <div class="question-topline">
-            <div>
-              <div class="eyebrow" id="roundLabel">Round 1 • Hormone Wars</div>
-              <h2 id="questionCounter">Question 1 of 12</h2>
-            </div>
-            <div class="question-metrics">
-              <div class="points-pill" id="pointsPill">2 points</div>
-              <div class="timer-panel">
-                <span id="timerDisplay">00:45</span>
-                <div class="timer-buttons">
-                  <button data-seconds="30" class="timer-set">30s</button>
-                  <button data-seconds="45" class="timer-set active">45s</button>
-                  <button data-seconds="60" class="timer-set">60s</button>
-                </div>
-                <div class="timer-controls">
-                  <button id="timerStartBtn" class="small-btn">Start</button>
-                  <button id="timerResetBtn" class="small-btn">Reset</button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="scenario-card">
-            <div class="scenario-graphic" id="scenarioGraphic" aria-hidden="true"></div>
-            <div class="scenario-copy">
-              <div class="scenario-label">Scenario</div>
-              <p id="questionText"></p>
-            </div>
-          </div>
-
-          <div class="answer-panel hidden" id="answerPanel" aria-live="polite">
-            <div class="answer-header">
-              <div>
-                <div class="scenario-label">Reveal</div>
-                <h3>Correct answer</h3>
-              </div>
-              <div class="scoring-chip">Manual scoring guide</div>
-            </div>
-            <p id="answerText"></p>
-            <div class="scoring-box" id="scoringText"></div>
-          </div>
-
-          <div class="controls-row">
-            <button id="prevBtn" class="secondary-btn">Previous</button>
-            <button id="revealBtn" class="primary-btn">Reveal Answer</button>
-            <button id="nextBtn" class="secondary-btn">Next</button>
-          </div>
-        </div>
-
-        <div class="end-card hidden" id="endCard">
-          <div class="hero-tag">Game complete</div>
-          <h2>Time for the debrief.</h2>
-          <p>Use the teacher key to discuss the hardest questions, then decide the winning team.</p>
-          <div class="hero-buttons">
-            <button id="playAgainBtn" class="primary-btn">Play Again</button>
-            <a class="secondary-btn" href="docs/Blood_Sugar_Battle_Teacher_Key.pdf" target="_blank" rel="noopener">Open Teacher Key</a>
-          </div>
-        </div>
-      </section>
-
-      <aside class="sidebar panel">
-        <section>
-          <h3>Game Flow</h3>
-          <div class="round-list" id="roundList"></div>
-        </section>
-
-        <section class="sidebar-block">
-          <h3>Projection Tips</h3>
-          <ul class="tip-list">
-            <li>Give teams 30-60 seconds before revealing.</li>
-            <li>Use the paper answer sheet for all team responses.</li>
-            <li>Score manually from the reveal box.</li>
-            <li>Use Fullscreen for a cleaner projection view.</li>
-          </ul>
-        </section>
-
-        <section class="sidebar-block">
-          <div class="scoreboard-header">
-            <h3>Optional Team Scoreboard</h3>
-            <button id="scoreResetBtn" class="tiny-link">Reset scores</button>
-          </div>
-          <div id="scoreboard" class="scoreboard"></div>
-        </section>
-
-        <section class="sidebar-block">
-          <h3>Keyboard Shortcuts</h3>
-          <ul class="tip-list compact">
-            <li><strong>→</strong> Next question</li>
-            <li><strong>←</strong> Previous question</li>
-            <li><strong>R</strong> Reveal / hide answer</li>
-            <li><strong>F</strong> Fullscreen</li>
-            <li><strong>T</strong> Start / pause timer</li>
-          </ul>
-        </section>
-      </aside>
-    </main>
-  </div>
-
-  <script src="app.js"></script>
-</body>
-</html>
+<body><div class="app">
+<header class="top"><div class="brand"><div class="badge"><svg viewBox="0 0 80 80"><circle cx="40" cy="40" r="34" fill="#ffe4ea"/><path d="M40 17v19" stroke="#ef476f" stroke-width="7" stroke-linecap="round"/><circle cx="40" cy="46" r="18" fill="#f4f8ff" stroke="#246bce" stroke-width="4"/><path d="M40 46l12-8" stroke="#f2aa26" stroke-width="5" stroke-linecap="round"/><circle cx="40" cy="46" r="4" fill="#f2aa26"/></svg></div><div><div class="eyebrow">HUN1201 Module 3 • Projected Team Game</div><h1>Blood Sugar Battle</h1></div></div><div><button id="full" class="ghost">Fullscreen</button> <button id="restart" class="ghost">Restart</button></div></header>
+<main class="layout"><section class="panel game">
+<div id="hero" class="hero"><div><span class="tag">Keep blood glucose in the zone</span><h2>Use the concepts. Skip the pathway-name memorization.</h2><p>Teams discuss each scenario and write one answer on paper. Reveal the answer, score manually, and use the explanation for a quick debrief.</p><div class="actions"><button id="start" class="primary">Start Game</button><a class="secondary" href="docs/Blood_Sugar_Battle_Group_Answer_Sheet.pdf" target="_blank">Open Group Sheet</a><a class="secondary" href="docs/Blood_Sugar_Battle_Teacher_Key.pdf" target="_blank">Open Teacher Key</a></div></div><div class="heroArt"><svg viewBox="0 0 430 320"><rect x="40" y="45" width="350" height="230" rx="36" fill="#101b38"/><circle cx="215" cy="160" r="88" fill="#263c72"/><circle cx="215" cy="160" r="63" fill="#f7fbff"/><path d="M215 160l43-25" stroke="#f2aa26" stroke-width="10" stroke-linecap="round"/><circle cx="215" cy="160" r="8" fill="#f2aa26"/><path d="M154 226c18 15 38 22 61 22s45-8 63-22" fill="none" stroke="#5ed3ff" stroke-width="9" stroke-linecap="round"/><rect x="80" y="78" width="91" height="34" rx="17" fill="#ef476f"/><text x="125.5" y="101" text-anchor="middle" font-size="15" fill="#fff" font-family="Arial">INSULIN</text><rect x="264" y="78" width="91" height="34" rx="17" fill="#246bce"/><text x="309.5" y="101" text-anchor="middle" font-size="15" fill="#fff" font-family="Arial">GLUCAGON</text></svg></div></div>
+<div id="qwrap" class="hidden"><div class="qtop"><div><div id="roundLabel" class="eyebrow"></div><h2 id="counter"></h2></div><div class="metrics"><div id="points" class="points"></div><div class="timer"><span id="time" class="time">00:45</span><div class="timerRow"><button class="timerSet" data-s="30">30s</button><button class="timerSet active" data-s="45">45s</button><button class="timerSet" data-s="60">60s</button></div><div class="timerRow"><button id="timerStart" class="mini">Start</button><button id="timerReset" class="mini">Reset</button></div></div></div></div>
+<div class="scenario"><div id="graphic" class="graphic"></div><div class="qcopy"><div class="label">Scenario</div><p id="question"></p></div></div>
+<div id="answerBox" class="answer hidden"><div class="label">Reveal</div><h3>Correct answer</h3><p id="answer"></p><div id="scoring" class="score"></div></div>
+<div class="controls"><button id="prev" class="secondary">Previous</button><button id="reveal" class="primary">Reveal Answer</button><button id="next" class="secondary">Next</button></div></div>
+<div id="end" class="end hidden"><span class="tag">Game complete</span><h2 style="font-size:2.2rem;margin-top:10px">Debrief the misses, then total the score.</h2><p style="color:var(--muted);font-size:1.1rem">Maximum score: 30 points. Use the tie-breaker in the teacher key only if needed.</p><div class="actions"><button id="again" class="primary">Play Again</button><a class="secondary" href="docs/Blood_Sugar_Battle_Teacher_Key.pdf" target="_blank">Open Teacher Key</a></div></div>
+</section><aside class="panel side"><h3>Game Flow</h3><div id="rounds" class="rounds"></div><div class="block"><h3>Projection Tips</h3><ul class="tips"><li>Give teams 30-60 seconds before revealing.</li><li>Students write on the paper answer sheet.</li><li>Score from the reveal box; equivalent wording is fine.</li><li>No pathway names are required for credit.</li></ul></div><div class="block"><h3>Optional Team Scoreboard</h3><div id="scoreboard" class="scoreboard"></div></div><div class="block"><h3>Keyboard Shortcuts</h3><ul class="tips"><li>→ next • ← previous</li><li>R reveal/hide</li><li>T start/pause timer</li><li>F fullscreen</li></ul></div></aside></main></div>
+<script>
+const Q=[{"round": "Round 1 - Blood Glucose Control", "short": "Blood Glucose Control", "points": 2, "graphic": "coffee", "question": "A student drinks a large sweetened coffee on an empty stomach. What happens to blood glucose, and which hormone responds?", "answer": "Blood glucose rises. Insulin is released and helps move glucose into cells for energy or storage, bringing blood glucose back down.", "scoring": "1 pt: blood glucose rises; 1 pt: insulin responds and lowers blood glucose through uptake/storage."}, {"round": "Round 1 - Blood Glucose Control", "short": "Blood Glucose Control", "points": 2, "graphic": "fasting", "question": "A person has not eaten for several hours and blood glucose begins to fall. Which hormone responds, and what stored carbohydrate can help maintain blood glucose?", "answer": "Glucagon responds. The liver can break down its stored glycogen and release glucose into the bloodstream.", "scoring": "1 pt: glucagon; 1 pt: liver glycogen is used to help raise/maintain blood glucose."}, {"round": "Round 1 - Blood Glucose Control", "short": "Blood Glucose Control", "points": 3, "graphic": "storage", "question": "After a large carbohydrate meal, immediate energy needs are met. Where is extra glucose stored first, and what can happen after glycogen storage is filled?", "answer": "Extra glucose is stored as glycogen in the liver and muscles first. When glycogen storage is filled and energy is still excessive, the excess can be stored as body fat.", "scoring": "1 pt: glycogen first; 1 pt: liver and/or muscle storage; 1 pt: additional excess can be stored as fat."}, {"round": "Round 2 - Storage & Fasting", "short": "Storage & Fasting", "points": 2, "graphic": "liverMuscle", "question": "Why can liver glycogen help maintain blood glucose between meals, while muscle glycogen cannot?", "answer": "Liver glycogen can be broken down and glucose released into the blood for other tissues. Muscle glycogen is reserved for that muscle's own activity.", "scoring": "1 pt: liver can support blood glucose; 1 pt: muscle glycogen is used locally by muscle."}, {"round": "Round 2 - Storage & Fasting", "short": "Storage & Fasting", "points": 2, "graphic": "lowCarb", "question": "A person starts a very-low-carbohydrate diet and loses several pounds during the first week. What explains much of the early weight loss?", "answer": "Much of the early loss is water. Glycogen is stored with water, so when glycogen stores are depleted, water is lost too.", "scoring": "1 pt: water loss; 1 pt: connects water loss to depletion of glycogen stores."}, {"round": "Round 3 - Food Form & Glycemic Response", "short": "Food Form & Glycemic Response", "points": 2, "graphic": "grain", "question": "Which would usually cause a slower rise in blood glucose: whole-grain bread or refined white bread? Explain why.", "answer": "Whole-grain bread usually causes a slower rise because it contains more fiber, which slows carbohydrate digestion and glucose absorption.", "scoring": "1 pt: whole-grain bread; 1 pt: fiber slows digestion/absorption or reduces the glucose spike."}, {"round": "Round 3 - Food Form & Glycemic Response", "short": "Food Form & Glycemic Response", "points": 2, "graphic": "fruit", "question": "Which would usually raise blood glucose more quickly: a whole apple or apple juice? Explain.", "answer": "Apple juice usually raises blood glucose more quickly because it contains little fiber. The fiber in a whole apple slows glucose absorption.", "scoring": "1 pt: apple juice; 1 pt: whole fruit fiber slows absorption."}, {"round": "Round 3 - Food Form & Glycemic Response", "short": "Food Form & Glycemic Response", "points": 2, "graphic": "bagel", "question": "Compare a plain bagel with a bagel eaten with peanut butter. Which would generally produce the slower blood-glucose rise, and why?", "answer": "The bagel with peanut butter. Protein and fat slow digestion and glucose absorption, producing a more gradual blood-glucose response.", "scoring": "1 pt: bagel with peanut butter; 1 pt: protein/fat slow digestion or glucose absorption."}, {"round": "Round 3 - Food Form & Glycemic Response", "short": "Food Form & Glycemic Response", "points": 2, "graphic": "sugars", "question": "Honey is stirred into oatmeal, maple syrup is poured on pancakes, and agave is added to tea. Which of these count as added sugars, and why?", "answer": "All three count as added sugars because they were introduced during preparation or at the table. Their natural origin does not make them naturally occurring sugar in that food.", "scoring": "1 pt: all three; 1 pt: recognizes that sugar added during preparation/at the table is added sugar regardless of source."}, {"round": "Round 4 - Diabetes & Fiber", "short": "Diabetes & Fiber", "points": 3, "graphic": "resistance", "question": "A person makes insulin, but the body's cells do not respond to it effectively. What happens to blood glucose, and which type of diabetes is this most associated with?", "answer": "Glucose does not enter cells normally, so blood glucose stays elevated. This insulin resistance is most associated with Type 2 diabetes.", "scoring": "1 pt: cells respond poorly to insulin; 1 pt: blood glucose remains elevated; 1 pt: Type 2 diabetes."}, {"round": "Round 4 - Diabetes & Fiber", "short": "Diabetes & Fiber", "points": 3, "graphic": "fiber", "question": "Give two ways a high-fiber food can support health, and name one food that is a good source of fiber.", "answer": "Acceptable effects include slowing glucose absorption, helping bowel regularity by holding water/adding stool bulk, helping lower cholesterol, increasing fullness, or feeding beneficial gut microbes. Good sources include beans, whole grains, vegetables, fruits, nuts, and seeds.", "scoring": "1 pt each for two correct fiber benefits; 1 pt for one appropriate high-fiber food source."}, {"round": "Round 5 - Final Boss", "short": "Final Boss", "points": 5, "graphic": "boss", "question": "Jordan eats pancakes with syrup and orange juice at 8:00 a.m., skips lunch, and does a hard workout late in the afternoon. Describe what happens to blood glucose and fuel storage/use from breakfast through the workout.", "answer": "After breakfast, blood glucose rises and insulin increases. Glucose is used for immediate energy and stored as glycogen; excess energy can be stored as fat. As time passes without food, blood glucose begins to fall, glucagon increases, and the liver uses glycogen to help maintain blood glucose. During the workout, muscle glycogen is used by the working muscles. With prolonged low carbohydrate availability, the body relies more on fat and other alternative fuels, and ketones may increase.", "scoring": "Up to 5 pts: blood glucose/insulin rise after breakfast; glucose used/stored as glycogen; glucagon/liver glycogen between meals; muscle glycogen fuels exercise locally; prolonged fasting shifts toward fat/alternative fuels or ketones."}]; const ROUNDS=[{"name": "Blood Glucose Control", "meta": "Q1-Q3 - insulin, glucagon, storage"}, {"name": "Storage & Fasting", "meta": "Q4-Q5 - liver vs muscle glycogen, low-carb water loss"}, {"name": "Food Form & Glycemic Response", "meta": "Q6-Q9 - whole grains, fruit, mixed meals, added sugar"}, {"name": "Diabetes & Fiber", "meta": "Q10-Q11 - insulin resistance, fiber"}, {"name": "Final Boss", "meta": "Q12 - full sequence"}]; let idx=0,shown=false,duration=45,remaining=45,timer=null;
+const $=id=>document.getElementById(id); const hero=$('hero'),qwrap=$('qwrap'),end=$('end');
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+let teams=JSON.parse(localStorage.getItem('bsbTeams')||'null')||[{name:'Team A',score:0},{name:'Team B',score:0},{name:'Team C',score:0},{name:'Team D',score:0}];
+function saveTeams(){localStorage.setItem('bsbTeams',JSON.stringify(teams))}
+function renderTeams(){$('scoreboard').innerHTML=teams.map((t,i)=>`<div class="team"><input data-name="${i}" value="${esc(t.name)}"><div class="scoreCtrls"><button class="scoreBtn" data-i="${i}" data-d="-1">−</button><span class="scoreVal">${t.score}</span><button class="scoreBtn" data-i="${i}" data-d="1">+</button></div></div>`).join(''); document.querySelectorAll('[data-i]').forEach(b=>b.onclick=()=>{let i=+b.dataset.i;teams[i].score=Math.max(0,teams[i].score+(+b.dataset.d));saveTeams();renderTeams()}); document.querySelectorAll('[data-name]').forEach(inp=>inp.oninput=()=>{teams[+inp.dataset.name].name=inp.value;saveTeams()})}
+function renderRounds(){let current=Q[idx]?.short||'';$('rounds').innerHTML=ROUNDS.map(r=>`<div class="round ${r.name===current?'active':''}"><strong>${r.name}</strong><small>${r.meta}</small></div>`).join('')}
+function art(type){const s=(body)=>`<svg viewBox="0 0 160 160">${body}</svg>`; const bg='<rect x="8" y="8" width="144" height="144" rx="30" fill="#fff"/>'; switch(type){
+case'coffee':return s(bg+'<rect x="42" y="46" width="70" height="65" rx="10" fill="#d98b4e"/><path d="M112 59h12c13 0 16 28 0 31h-12" fill="none" stroke="#fff" stroke-width="7"/><path d="M52 35c8-12 4-17 0-23M75 35c8-12 4-17 0-23M98 35c8-12 4-17 0-23" stroke="#ffcf7a" stroke-width="5" stroke-linecap="round"/><path d="M35 128h90" stroke="#5ed3ff" stroke-width="7"/><path d="M50 127l30-40 28 17" fill="none" stroke="#ef476f" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>');
+case'fasting':return s(bg+'<circle cx="80" cy="74" r="38" fill="#f3f7ff" stroke="#246bce" stroke-width="6"/><path d="M80 74L80 48M80 74l22 12" stroke="#14213d" stroke-width="6" stroke-linecap="round"/><path d="M48 126h64" stroke="#f2aa26" stroke-width="8" stroke-linecap="round"/><path d="M50 126l20-17 18 11 22-24" fill="none" stroke="#2b9b66" stroke-width="7"/>');
+case'storage':return s(bg+'<circle cx="80" cy="38" r="13" fill="#f2aa26"/><path d="M80 51v24M80 75H38M80 75h42" stroke="#14213d" stroke-width="5"/><rect x="22" y="91" width="49" height="34" rx="12" fill="#5ed3ff"/><rect x="89" y="91" width="49" height="34" rx="12" fill="#ef476f"/><text x="46" y="112" text-anchor="middle" font-size="11" fill="#14213d" font-family="Arial">GLYCOGEN</text><text x="113" y="112" text-anchor="middle" font-size="11" fill="#fff" font-family="Arial">FAT</text>');
+case'liverMuscle':return s(bg+'<path d="M25 63c7-22 30-32 57-28 20 3 31 15 28 29-4 17-24 29-48 27-22-2-40-13-37-28Z" fill="#a94b4b"/><path d="M112 45c16 7 21 26 12 48-7 17-18 28-28 26-10-2-11-17-2-39 7-18 10-38 18-35Z" fill="#ef8d70"/><path d="M56 102h48" stroke="#5ed3ff" stroke-width="7" stroke-linecap="round"/><path d="M56 102l11-9M56 102l11 9" stroke="#5ed3ff" stroke-width="7" stroke-linecap="round"/>');
+case'lowCarb':return s(bg+'<rect x="32" y="44" width="96" height="62" rx="18" fill="#eef3ff" stroke="#b8c8e8" stroke-width="4"/><rect x="42" y="55" width="76" height="14" rx="7" fill="#dce6fb"/><rect x="42" y="78" width="35" height="18" rx="9" fill="#ef476f"/><path d="M80 120c0 0-20-20-20-35 0-12 9-22 20-22s20 10 20 22c0 15-20 35-20 35Z" fill="#5ed3ff" opacity=".85"/>');
+case'grain':return s(bg+'<path d="M24 56c0-14 12-25 27-25h12c15 0 27 11 27 25v37H24Z" fill="#b9824e"/><path d="M70 56c0-14 12-25 27-25h12c15 0 27 11 27 25v37H70Z" fill="#ead4aa"/><path d="M80 114h56" stroke="#2b9b66" stroke-width="8"/><path d="M24 114h44" stroke="#ef476f" stroke-width="8"/>');
+case'fruit':return s(bg+'<circle cx="52" cy="72" r="31" fill="#e64242"/><path d="M52 42c7-14 20-16 30-10" stroke="#2b9b66" stroke-width="7" stroke-linecap="round"/><rect x="96" y="46" width="27" height="57" rx="7" fill="#ffdf9d" stroke="#f2aa26" stroke-width="4"/><rect x="100" y="64" width="19" height="35" rx="5" fill="#f2aa26"/><path d="M123 50l12-16" stroke="#5ed3ff" stroke-width="6"/>');
+case'bagel':return s(bg+'<circle cx="48" cy="75" r="31" fill="#d9954d"/><circle cx="48" cy="75" r="10" fill="#fff"/><circle cx="111" cy="75" r="31" fill="#d9954d"/><circle cx="111" cy="75" r="10" fill="#fff"/><path d="M88 58c12-12 35-11 46 1" stroke="#a8682d" stroke-width="12" stroke-linecap="round"/>');
+case'sugars':return s(bg+'<path d="M30 115h28V70H30Z" fill="#f2aa26"/><path d="M66 115h28V50H66Z" fill="#bc6b2f"/><path d="M102 115h28V60H102Z" fill="#e0a431"/><path d="M27 70l17-18 17 18" fill="#ffd65f"/><path d="M64 50l16-18 16 18" fill="#8b4f27"/><path d="M100 60l16-18 16 18" fill="#b4a44c"/><text x="44" y="132" text-anchor="middle" font-size="10" font-family="Arial">HONEY</text><text x="80" y="132" text-anchor="middle" font-size="10" font-family="Arial">MAPLE</text><text x="116" y="132" text-anchor="middle" font-size="10" font-family="Arial">AGAVE</text>');
+case'resistance':return s(bg+'<circle cx="48" cy="78" r="28" fill="#dce8ff" stroke="#246bce" stroke-width="5"/><circle cx="111" cy="78" r="28" fill="#ffe4ea" stroke="#ef476f" stroke-width="5"/><path d="M74 78h12" stroke="#14213d" stroke-width="6"/><path d="M84 67l10 11-10 11" fill="none" stroke="#14213d" stroke-width="6"/><path d="M111 48v60" stroke="#ef476f" stroke-width="5"/><path d="M99 61l24 34M123 61L99 95" stroke="#ef476f" stroke-width="5"/>');
+case'fiber':return s(bg+'<path d="M34 104c0-34 21-61 46-61 26 0 46 27 46 61" fill="none" stroke="#e89f78" stroke-width="18" stroke-linecap="round"/><circle cx="54" cy="77" r="7" fill="#2b9b66"/><circle cx="77" cy="94" r="7" fill="#7a5ce6"/><circle cx="103" cy="73" r="7" fill="#f2aa26"/><path d="M28 125h104" stroke="#5ed3ff" stroke-width="7"/><path d="M37 125c12-12 22-12 34 0s22 12 34 0 22-12 27 0" fill="none" stroke="#2b9b66" stroke-width="6"/>');
+case'boss':return s('<rect x="8" y="8" width="144" height="144" rx="30" fill="#101b38"/><path d="M30 113c14-39 37-55 66-55 12 0 23 3 33 9" fill="none" stroke="#5ed3ff" stroke-width="7"/><path d="M30 54h30M30 75h48M30 96h64" stroke="#ef476f" stroke-width="9" stroke-linecap="round"/><circle cx="112" cy="66" r="22" fill="#ffffff22"/><path d="M112 66l14-9" stroke="#f2aa26" stroke-width="6" stroke-linecap="round"/><circle cx="112" cy="66" r="5" fill="#f2aa26"/>'); default:return s(bg)}}
+function render(){renderRounds(); if(idx>=Q.length){qwrap.classList.add('hidden');end.classList.remove('hidden');stopTimer();return} end.classList.add('hidden');qwrap.classList.remove('hidden'); const q=Q[idx];$('roundLabel').textContent=q.round;$('counter').textContent=`Question ${idx+1} of ${Q.length}`;$('points').textContent=`${q.points} point${q.points>1?'s':''}`;$('question').textContent=q.question;$('answer').textContent=q.answer;$('scoring').textContent=q.scoring;$('graphic').innerHTML=art(q.graphic);$('answerBox').classList.toggle('hidden',!shown);$('reveal').textContent=shown?'Hide Answer':'Reveal Answer';$('prev').disabled=idx===0;$('prev').style.opacity=idx===0?'.45':'1';$('next').textContent=idx===Q.length-1?'Finish':'Next'}
+function startGame(){idx=0;shown=false;hero.classList.add('hidden');resetTimer();render()} function next(){if(idx<Q.length-1){idx++;shown=false;resetTimer();render()}else{idx=Q.length;render()}} function prev(){if(idx>0){idx--;shown=false;resetTimer();render()}} function reveal(){shown=!shown;render()}
+function fmt(s){return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')} function updateTime(){$('time').textContent=fmt(remaining);$('time').classList.toggle('warn',remaining<=10)} function stopTimer(){if(timer){clearInterval(timer);timer=null}$('timerStart').textContent='Start'} function resetTimer(){stopTimer();remaining=duration;updateTime()} function toggleTimer(){if(timer){stopTimer();return}timer=setInterval(()=>{remaining--;if(remaining<=0){remaining=0;stopTimer()}updateTime()},1000);$('timerStart').textContent='Pause'}
+$('start').onclick=startGame;$('again').onclick=startGame;$('next').onclick=next;$('prev').onclick=prev;$('reveal').onclick=reveal;$('timerStart').onclick=toggleTimer;$('timerReset').onclick=()=>resetTimer();document.querySelectorAll('.timerSet').forEach(b=>b.onclick=()=>{duration=+b.dataset.s;document.querySelectorAll('.timerSet').forEach(x=>x.classList.toggle('active',x===b));resetTimer()});$('full').onclick=()=>{if(!document.fullscreenElement)document.documentElement.requestFullscreen?.();else document.exitFullscreen?.()};$('restart').onclick=()=>{stopTimer();idx=0;shown=false;hero.classList.remove('hidden');qwrap.classList.add('hidden');end.classList.add('hidden');renderRounds()};document.addEventListener('keydown',e=>{if(e.target.matches('input'))return;if(e.key==='ArrowRight')next();if(e.key==='ArrowLeft')prev();if(e.key.toLowerCase()==='r')reveal();if(e.key.toLowerCase()==='t')toggleTimer();if(e.key.toLowerCase()==='f')$('full').click()});renderTeams();renderRounds();resetTimer();
+</script></body></html>

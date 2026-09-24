@@ -1,41 +1,17 @@
-# Blood Sugar Battle - GitHub Pages Package
+# Blood Sugar Battle - Concept-Aligned GitHub Pages Package
 
-This package contains a static, browser-based projected game for HUN1201 Module 3.
-Students do not enter any information into the game. They write answers on paper in teams while the instructor controls the projected screen.
+This static projected game is aligned to the Module 3 carbohydrate reading and the concepts emphasized on the Module 3 exam. It intentionally avoids requiring students to recall alpha/beta cell names or pathway names such as glycogenolysis or gluconeogenesis.
 
-## Included files
+## Files
+- `index.html` - self-contained projected game (CSS and JavaScript embedded)
+- `docs/Blood_Sugar_Battle_Group_Answer_Sheet.pdf` - student group sheet
+- `docs/Blood_Sugar_Battle_Teacher_Key.pdf` - updated teacher key
 
-- `index.html` - main game page
-- `styles.css` - styling
-- `app.js` - game logic
-- `docs/Blood_Sugar_Battle_Group_Answer_Sheet.pdf` - printable student group sheet
-- `docs/Blood_Sugar_Battle_Teacher_Key.pdf` - printable teacher key
+## GitHub Pages
+1. Create or open the GitHub repository used for the game.
+2. Replace the old `index.html` with this one.
+3. Upload/replace the files in the `docs` folder.
+4. Commit the changes. GitHub Pages should refresh automatically after the commit.
 
-## GitHub Pages setup
-
-1. Create a new GitHub repository.
-2. Upload the contents of this folder to the repository root.
-3. Go to **Settings -> Pages**.
-4. Under **Build and deployment**, choose **Deploy from a branch**.
-5. Select the **main** branch and the **/(root)** folder.
-6. Save. GitHub will generate a Pages URL for the game.
-
-## Canvas setup
-
-1. In Canvas, add the Group Answer Sheet PDF and Teacher Key PDF to Files if desired.
-2. Add a Module item or Page button called **Blood Sugar Battle**.
-3. Link that button to the GitHub Pages URL.
-4. Open the link on the classroom computer and project it.
-
-## In-class use
-
-- Put students in small groups.
-- Give each team one printed group answer sheet.
-- Use the timer or ignore it.
-- Click **Reveal Answer** after discussion time.
-- Score manually using the reveal panel and/or the teacher key.
-- Optional: use the built-in projected scoreboard.
-
-## Privacy note
-
-This game is designed to be a static front-end only experience. It does not require student accounts, form submission, or collection of student data.
+## In class
+Students work in groups and write answers on paper. The instructor advances the projected game, reveals answers, and scores manually. Maximum score: 30 points.
